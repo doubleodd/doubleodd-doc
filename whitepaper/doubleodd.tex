@@ -735,8 +735,8 @@ $\bF_q$).
 
 $\QR(K)$ is the set of quadratic residues in field $K$: $\QR(K) = \{ x^2
 \,|\, x \in K \} $. Note that $0 \in \QR(K)$. Most of the time, we will
-work with the field $\bF_q$ and will use the shorthand $QR$ to designate
-$QR(\bF_q)$.
+work with the field $\bF_q$ and will use the shorthand $\QR$ to designate
+$\QR(\bF_q)$.
 
 $x$, $y$, $u$, $w$... designate point coordinates, i.e. elements of
 $\bF_q$. In this section, $X$ is the symbolic identifier for the
@@ -845,7 +845,7 @@ properties hold:
 
     \item $b \neq 0$ (otherwise, $0$ would be a double root).
 
-    \item $a^2 - 4b \neq 0$ (otherwise, $X^2+aX+B$ would have a
+    \item $a^2 - 4b \neq 0$ (otherwise, $X^2+aX+b$ would have a
     double root).
 
 \end{itemize}
@@ -1010,7 +1010,7 @@ to the following important fact:
 \noindent\fbox{\begin{minipage}{\textwidth - 6.8pt}
 \begin{center}\textsf{\textbf{Characterization of \emph{r}-torsion points}}\end{center}
 For any point $P = (x, y) \in E$ such that $P\neq \neutral, N$,
-$P \in E[r]$ if and only if $x \in QR$.
+$P \in E[r]$ if and only if $x \in \QR$.
 \end{minipage}}
 
 \vspace{2ex}
@@ -1115,9 +1115,9 @@ When $j \neq 0$ and $j\neq 1728$, there are exactly two curves (up to
 isomorphism) that have this $j$-invariant, and they are quadratic twists
 of each other (i.e. they become the same curve when lifted into the
 extension field $\bF_{q^2}$). For curve $y^2 = x(x^2 + ax + b)$, the
-quadratic twist has equation $y^2 = x(x^2 - ax + b)$. If a curve has
-order $2r$, then its twist has order $2q + 2 - 2r$, which is then also
-equal to $2$ modulo $4$.
+quadratic twist has equation $y^2 = x(x^2 + adx + bd^2)$ for any
+$d\notin\QR$. If a curve has order $2r$, then its twist has order
+$2q + 2 - 2r$, which is then also equal to $2$ modulo $4$.
 
 The case $j = 0$ is not very interesting to us. Indeed, such a curve is
 isomorphic to the short Weierstraß curve $y^2 = x^3 + B$ for some $B\neq
@@ -1247,9 +1247,9 @@ can be made out of unified formulas, by handling the remaining
 exceptional cases with a pair of constant-time conditional copy
 operations (adding an element with the neutral element should yield back
 the first element). Using complete \emph{formulas} can avoid even such
-conditional copies. Generally speaking, complete routines are
-sufficient for most secure implementations; complete formulas are
-helpful in some specific contexts, such as the following:
+conditional copies. Generally speaking, unified routines are sufficient
+for most secure implementations; complete formulas are helpful in some
+specific contexts, such as the following:
 \begin{itemize}
 
     \item Some hardware platforms may provide efficient accelerators
@@ -1814,7 +1814,7 @@ the specificities of the curve.
 
 \paragraph{Elligator2.} This mapping is applicable to double-odd curves
 as long as $a \neq 0$. Let $d$ be a conventional fixed value in $\bF_q$
-such that $d \notin QR$ (e.g. we can use $d = -1$ when $q = 3 \bmod 4$).
+such that $d \notin \QR$ (e.g. we can use $d = -1$ when $q = 3 \bmod 4$).
 For an input $e \in \bF_q$:
 \begin{enumerate}
 
@@ -1822,8 +1822,8 @@ For an input $e \in \bF_q$:
 
     \item Otherwise, set $v = a/(1 + de^2)$ and $z = v(v^2 + av + b)$,
     and compute the Legendre symbol of $z$ (the Legendre symbol of a value
-    $t$ is $0$ if $t = 0$, $1$ if $t\neq 0$ and $t \in QR$, or -1 if $t
-    \notin QR$). Note that $v\neq 0$, and therefore $z\neq 0$ (otherwise,
+    $t$ is $0$ if $t = 0$, $1$ if $t\neq 0$ and $t \in \QR$, or -1 if $t
+    \notin \QR$). Note that $v\neq 0$, and therefore $z\neq 0$ (otherwise,
     the curve would not be double-odd). Then:
     \begin{itemize}
         \item If $\chi(z) = 1$, then set $x = v$.
@@ -1859,8 +1859,8 @@ $e \in \bF_q$:
     Therefore, at least one of $x_1$, $x_2$ and $x_1 x_2$ is the $x$
     coordinate for a point on the curve:
     \begin{itemize}
-        \item If $x_1 \in QR$, then set $x = x_1$.
-        \item Otherwise, if $x_2 \in QR$, then set $x = x_2$.
+        \item If $x_1 \in \QR$, then set $x = x_1$.
+        \item Otherwise, if $x_2 \in \QR$, then set $x = x_2$.
         \item Otherwise, set $x = x_1 x_2$.
     \end{itemize}
 
@@ -2322,7 +2322,7 @@ double-odd elliptic curves, provided that the curve equation constants
 are chosen appropriately. This relies on the observation that
 application of $\theta_1$ or $\theta'_{1/2}$ yields a value of $X$ which
 is the square of a known value, multiplied by a small constant. Suppose
-now that we work in a field $\bF_q$ such that $2\notin QR$; this is
+now that we work in a field $\bF_q$ such that $2\notin \QR$; this is
 equivalent to saying that $q = 3$ or $5 \bmod 8$. In that case, for a
 point $(x,w) \in \bG$, there exists values $F$, $W$ and $Z$ such that
 $x = 2(F^2/Z^2)$ and $w = W/Z$. The $X$ coordinate (in Jacobian
@@ -2339,8 +2339,8 @@ Similarly, application of $\theta'_{1/2}$ on the result will use:
     W'' &= (2F' + W')(2F' - W') - 2a Z'^2 \\
     Z'' &= 2W'Z'
 \end{align*}
-These formulas hinge on the fact that if $2 \notin QR$, then $(a^2-4b)/2
-\in QR$ and $2b \in QR$. Both $\theta_1$ and $\theta'_{1/2}$ can be
+These formulas hinge on the fact that if $2 \notin \QR$, then $(a^2-4b)/2
+\in \QR$ and $2b \in \QR$. Both $\theta_1$ and $\theta'_{1/2}$ can be
 computed in cost 2M+1S, leading to a per-doubling cost of 4M+2S, i.e.
 ``six multiplications''. Note though that on small architectures, the
 relative costs of multiplications and squarings is likely to make it so
@@ -3132,7 +3132,7 @@ shall be noted:
     quadratic residues in $\bF_q$ when $q = 1\bmod 4$, so the next best
     choice is $\pm 2$. This is not, in fact, a restrictive condition:
     for a given $q$, there are only four possible curves with $j = 1728$
-    (up to isomorphism) and only two of them will have $b \notin QR$;
+    (up to isomorphism) and only two of them will have $b \notin \QR$;
     using $b = \pm 2$ exhausts all possibilities for double-odd curves.
 
 \end{itemize}
@@ -3688,8 +3688,8 @@ We compute Legendre symbols on $G_1$ and $G_2$; each symbol will be either
 $1$ (value is a quadratic residue) or $-1$ (value is not a quadratic
 residue). Then:
 \begin{itemize}
-    \item If $G_1 \in QR$, then set $x' = E_1 / F$ and $y' = (\sqrt{G_1}) / H$.
-    \item Otherwise, if $G_2 \in QR$, then set $x' = E_2 / F$ and
+    \item If $G_1 \in \QR$, then set $x' = E_1 / F$ and $y' = (\sqrt{G_1}) / H$.
+    \item Otherwise, if $G_2 \in \QR$, then set $x' = E_2 / F$ and
     $y' = (\sqrt{G_2}) / H$.
     \item Otherwise, set $x' = (E_1 E_2) / F^2$ and
     $y' = (\sqrt{G_1 G_2}) / H^2$.
@@ -3724,9 +3724,9 @@ Otherwise, define the following values:
 None of $G_1$, $F$ and $H$ can be zero; however, $G_2$ can be zero (but only
 if $e = 0$). We compute a Legendre symbol on $G_1$:
 \begin{itemize}
-    \item If $G_1 \in QR$, then set $x' = E_1 / F$ and $y' = (\sqrt{G_1}) / H$.
+    \item If $G_1 \in \QR$, then set $x' = E_1 / F$ and $y' = (\sqrt{G_1}) / H$.
     \item Otherwise, set $x' = E_2 / F$ and
-    $y' = (\sqrt{G_2}) / H$.
+    $y' = (-\sqrt{G_2}) / H$.
 \end{itemize}
 
 The obtained $(x', y')$ is a point on the dual curve. We apply the
@@ -4194,7 +4194,6 @@ D.~Bernstein and T.~Lange,
 \emph{Faster addition and doubling on elliptic curves},
 Advances in Cryptology - ASIACRYPT 2007, Lecture Notes in Computer
 Science, vol.~4833, pp.~29-50, 2007.
-
 \url{https://eprint.iacr.org/2007/286}
 
 \bibitem{Boo1951}
@@ -4265,7 +4264,7 @@ vol.~9215, pp.~705-723, 2015.
 H.~Hisil, K.~Wong, G.~Carter and E.~Dawson,
 \emph{Twisted Edwards Curves Revisited},
 Advances in Cryptology - ASIACRYPT 2008, Lecture Notes in Computer Science,
-vol 5350, pp.~326-343, 2008.
+vol.~5350, pp.~326-343, 2008.
 
 \bibitem{Fips186}
 Information Technology Laboratory,
