@@ -1316,7 +1316,7 @@ and that:
 we can simplify the formulas into:
 \begin{align*}
     x_3 &= \frac{b(y_1 x_2 + y_2 x_1)^2}{x_1 x_2 (x_1 x_2 - b)^2} \\
-    y_3 &= \frac{-b (y_1 x_2 + y_2 x_1)((y_1 y_2 + a x_1 x_2)(x_1 x_2 + b) + 2b x_1 x_2 (x_1 + x2))}{x_1 x_2 (x_1 x_2 - b)^3}
+    y_3 &= \frac{-b (y_1 x_2 + y_2 x_1)((y_1 y_2 + a x_1 x_2)(x_1 x_2 + b) + 2b x_1 x_2 (x_1 + x_2))}{x_1 x_2 (x_1 x_2 - b)^3}
 \end{align*}
 However, these alternate formulas are only unified, not complete, since
 setting $x_1 = 0$ or $x_2 = 0$ implies an undefined division by zero.
@@ -3805,7 +3805,7 @@ specialize that method into the following process. Let $x$ be an integer
 such that $x\leq (r-1)\text{max}(s, t)$, and we want to compute $\lfloor
 x/r \rceil$:
 \begin{enumerate}
-    \item Set: $z \leftarrow x + (r-1)2$
+    \item Set: $z \leftarrow x + (r-1)/2$
     \item Set: $y \leftarrow \lfloor z / 2^{254} \rfloor + 1$
     \item If $yr > z$, then set: $y \leftarrow y-1$
     \item Return $y$
